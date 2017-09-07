@@ -105,6 +105,7 @@ router.get("/deck/:id", function(req, res) {
     ]
   })
   .then(function(data) {
+    console.log("*******this is data:", data);
     res.render("cards", {deck: data });
   })
   .catch(function(err) {
@@ -121,6 +122,22 @@ router.post("/newcard/:id", function(req, res) {
   })
   .then(function(data) {
     res.redirect("/deck/" + req.params.id);
+  })
+  .catch(function(err) {
+    res.render("problem", {error: err});
+  });
+});
+
+//*** Change a card ***//
+router.post("/deck/:deckId/change/:cardId", function(req, res) {
+  models.Card.update({
+    question: req.body.question,
+    answer: req.body.answer,
+    deckId: req.params.deckId},
+    {where: {id: req.params.cardId}}
+  )
+  .then(function(data) {
+    res.redirect("/deck/" + req.params.deckId);
   })
   .catch(function(err) {
     res.render("problem", {error: err});

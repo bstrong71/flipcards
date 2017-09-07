@@ -12,9 +12,11 @@
   </div>
     {{#Cards}}
       <div class="eachCard">
-        <p>{{question}}?</p>
-        <p>{{answer}}</p>
-        <a href="#">Edit Card</a>
+        <form class="editCard" action="/deck/{{#deck}}{{id}}{{/deck}}/change/{{id}}" method="post">
+          <input type="text" name="question" value="{{question}}" placeholder="Question">
+          <input type="text" name="answer" value="{{answer}}" placeholder="Answer">
+          <button type="submit" name="button">Edit Card</button>
+        </form>
         <a href="/trash/{{id}}">Delete Card</a>
       </div>
     {{/Cards}}
