@@ -120,7 +120,7 @@ router.post("/newcard/:id", function(req, res) {
     deckId: req.params.id
   })
   .then(function(data) {
-    res.redirect("/home");
+    res.redirect("/deck/" + req.params.id);
   })
   .catch(function(err) {
     res.render("problem", {error: err});
