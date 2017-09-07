@@ -1,4 +1,5 @@
 const express  = require("express");
+const models   = require("../models/index");
 const router   = express.Router();
 const bcrypt   = require("bcrypt");
 
@@ -41,8 +42,8 @@ router.post("/signup", function(req, res) {
   let hashedPassword = bcrypt.hashSync(password, salt)
   let newUser = {
     username: username,
-    salt: salt,
-    password: hashedPassword
+    password: hashedPassword,
+    salt: salt
   }
   models.User.create(newUser).then(function() {
     res.redirect('/');
@@ -54,6 +55,13 @@ router.post("/signup", function(req, res) {
 
 router.get("/home", isAuthenticated, function(req, res) {
   res.render("home");
+});
+
+
+
+router.get("/logout", function(req, res) {
+  req.logout();
+  res.redirect("/");
 });
 
 module.exports = router;
