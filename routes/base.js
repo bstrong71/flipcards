@@ -58,7 +58,7 @@ router.post("/signup", function(req, res) {
 //*** Home page with create deck, select deck, and start ***//
 router.get("/home", isAuthenticated, function(req, res) {
 
-  res.render("home");
+  res.render("home", {user: req.user.username});
 });
 
  /////********TEMP*TEST DATA to DELETE LATER********//
@@ -75,26 +75,27 @@ router.get("/api/bro", function(req, res) {
   res.status(200).json(datahere)
 });
 // *******************************************//
+// *******************************************//
+
+//*** View a new deck ***//
+router.get("/newdeck", function(req, res) {
+  res.render("newdeck")
+})
 
 //*** Create a new deck ***//
-router.post("/create/:id", function(req, res) {
+router.post("/newdeck", function(req, res) {
   models.Deck.create({
     name: req.body.name,
-    userId: req.params.id
+    userId: req.user.id
   })
   .then(function(data) {
-
-    res.redirect("/newdeck");
+    res.redirect("/home");
   })
   .catch(function(err) {
-
     res.render("problem", {error: err});
   });
 });
 
-router.get("/newdeck", function(req, res) {
-  res.render("new")
-})
 
 
 router.get("/logout", function(req, res) {
