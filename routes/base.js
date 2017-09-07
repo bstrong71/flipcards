@@ -1,9 +1,9 @@
-const express  = require("express");
-const models   = require("../models/index");
-const router   = express.Router();
-const bcrypt   = require("bcrypt");
-
-const passport = require("passport");
+const express       = require("express");
+const models        = require("../models/index");
+const router        = express.Router();
+const bcrypt        = require("bcrypt");
+const LocalStrategy = require('passport-local').Strategy;
+const passport      = require("passport");
 
 //** Middleware to verify logged in **//
 const isAuthenticated = function (req, res, next) {
@@ -20,6 +20,7 @@ router.get("/", function(req, res) {
   });
 });
 
+//*** Login ***//
 router.post('/login', passport.authenticate('local', {
     successRedirect: '/home',
     failureRedirect: '/',
@@ -30,6 +31,7 @@ router.get("/signup", function(req, res) {
   res.render("signin");
 });
 
+//*** Sign Up new user ***//
 router.post("/signup", function(req, res) {
   let username = req.body.username;
   let password = req.body.password;
@@ -53,10 +55,46 @@ router.post("/signup", function(req, res) {
   });
 });
 
+//*** Home page with create deck, select deck, and start ***//
 router.get("/home", isAuthenticated, function(req, res) {
+
   res.render("home");
 });
 
+ /////********TEMP*TEST DATA to DELETE LATER********//
+const datahere = {
+  id: 1,
+  username: "isaac",
+  password: "asdfasdfasdfasdfs",
+  salt: "asdflkhdfg",
+  favColor: "blue",
+  admin: false
+}
+
+router.get("/api/bro", function(req, res) {
+  res.status(200).json(datahere)
+});
+// *******************************************//
+
+//*** Create a new deck ***//
+router.post("/create/:id", function(req, res) {
+  models.Deck.create({
+    name: req.body.name,
+    userId: req.params.id
+  })
+  .then(function(data) {
+
+    res.redirect("/newdeck");
+  })
+  .catch(function(err) {
+
+    res.render("problem", {error: err});
+  });
+});
+
+router.get("/newdeck", function(req, res) {
+  res.render("new")
+})
 
 
 router.get("/logout", function(req, res) {
