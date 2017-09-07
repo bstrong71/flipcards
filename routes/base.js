@@ -105,7 +105,6 @@ router.get("/deck/:id", function(req, res) {
     ]
   })
   .then(function(data) {
-    console.log('DATA*************\n', data);
     res.render("cards", {deck: data });
   })
   .catch(function(err) {
@@ -128,18 +127,18 @@ router.post("/newcard/:id", function(req, res) {
   });
 });
 
-//*** Delete Cards *** fix code//
-// router.get("/trash/:id", function(req, res) {
-//   models.Deck.destroy({
-//     where: {id: req.params.id}
-//   })
-//   .then(function(data) {
-//     res.redirect("/home");
-//   })
-//   .catch(function(err) {
-//     res.render("problem", {error: err});
-//   });
-// })
+//*** Delete Card ***//
+router.get("/trash/:id", function(req, res) {
+  models.Card.destroy({
+    where: {id: req.params.id}
+  })
+  .then(function(data) {
+    res.redirect("/home");
+  })
+  .catch(function(err) {
+    res.render("problem", {error: err});
+  });
+})
 
 //*** Logout ***//
 router.get("/logout", function(req, res) {
