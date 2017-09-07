@@ -7,12 +7,19 @@
     {{#deck}}
       <div class="section">
         <p>Deck Name: {{name}}</p>
-        <a href="/deck/{{id}}">Choose Deck</a>
+        <a href="/quiz/{{id}}">Start Quiz</a>
+        <a href="/deck/{{id}}">Change Cards</a>
         <a href="/trash/{{id}}">Delete Deck</a>
       </div>
     {{/deck}}
     {{^deck}}
       <p>There are no decks.</p>
     {{/deck}}
+    <div class="deckInfo">
+      <form class="buildNewDeck" action="/newdeck" method="post">
+        <input type="text" name="name" value="" placeholder="Deck Name">
+        <button type="submit" name="button">Create Deck</button>
+      </form>
+    </div>
   </div>
 </div>

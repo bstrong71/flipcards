@@ -81,10 +81,6 @@ router.get("/api/bro", function(req, res) {
 // *******************************************//
 // *******************************************//
 
-//*** View a new deck ***//
-router.get("/newdeck", function(req, res) {
-  res.render("newdeck")
-})
 
 //*** Create a new deck ***//
 router.post("/newdeck", function(req, res) {
@@ -100,10 +96,29 @@ router.post("/newdeck", function(req, res) {
   });
 });
 
-//*** Delete Deck ***//
-router.get("/trash/:id", function(req, res) {
-  models.Deck.destroy({
-    where: {id: req.params.id}
+//*** Card Change page ***//
+router.get("/deck/:id", function(req, res) {
+  models.Deck.findOne({
+    where: {id: req.params.id},
+    include: [
+      {model: models.Card, as: "Cards"}
+    ]
+  })
+  .then(function(data) {
+    console.log('DATA*************\n', data);
+    res.render("cards", {deck: data });
+  })
+  .catch(function(err) {
+    res.render("problem", {error: err});
+  })
+});
+
+//*** Create a new card ***//
+router.post("/newcard/:id", function(req, res) {
+  models.Card.create({
+    question: req.body.question,
+    answer: req.body.answer,
+    deckId: req.params.id
   })
   .then(function(data) {
     res.redirect("/home");
@@ -111,9 +126,22 @@ router.get("/trash/:id", function(req, res) {
   .catch(function(err) {
     res.render("problem", {error: err});
   });
-})
+});
 
+//*** Delete Cards *** fix code//
+// router.get("/trash/:id", function(req, res) {
+//   models.Deck.destroy({
+//     where: {id: req.params.id}
+//   })
+//   .then(function(data) {
+//     res.redirect("/home");
+//   })
+//   .catch(function(err) {
+//     res.render("problem", {error: err});
+//   });
+// })
 
+//*** Logout ***//
 router.get("/logout", function(req, res) {
   req.logout();
   res.redirect("/");
