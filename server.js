@@ -8,6 +8,7 @@ const passport        = require("passport");
 const LocalStrategy   = require("passport-local").Strategy;
 const session         = require("express-session");
 const flash           = require("express-flash-messages");
+const model           = require("./models/index");
 const bcrypt          = require("bcrypt");
 const cookieParser    = require("cookie-parser");
 

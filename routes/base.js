@@ -44,13 +44,12 @@ router.post("/signup", function(req, res) {
     salt: salt,
     password: hashedPassword
   }
-
-  // models.User.create(newUser).then(function() {
-  //   res.redirect('/');
-  // }).catch(function(error) {
-  //   req.flash('error', "Please, choose a different username.")
-  //   res.redirect('/signup')
-  // });
+  models.User.create(newUser).then(function() {
+    res.redirect('/');
+  }).catch(function(error) {
+    req.flash('error', "Please, choose a different username.")
+    res.redirect('/signup')
+  });
 });
 
 router.get("/home", isAuthenticated, function(req, res) {
