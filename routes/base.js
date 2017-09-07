@@ -57,8 +57,13 @@ router.post("/signup", function(req, res) {
 
 //*** Home page with create deck, select deck, and start ***//
 router.get("/home", isAuthenticated, function(req, res) {
-
-  res.render("home", {user: req.user.username});
+  models.Deck.findAll({})
+  .then(function(data) {
+    res.render("home", {user: req.user.username, deck: data});
+  })
+  .catch(function(err) {
+    res.render("problem", {error: err});
+  })
 });
 
  /////********TEMP*TEST DATA to DELETE LATER********//
@@ -70,7 +75,6 @@ const datahere = {
   favColor: "blue",
   admin: false
 }
-
 router.get("/api/bro", function(req, res) {
   res.status(200).json(datahere)
 });
@@ -96,6 +100,18 @@ router.post("/newdeck", function(req, res) {
   });
 });
 
+//*** Delete Deck ***//
+router.get("/trash/:id", function(req, res) {
+  models.Deck.destroy({
+    where: {id: req.params.id}
+  })
+  .then(function(data) {
+    res.redirect("/home");
+  })
+  .catch(function(err) {
+    res.render("problem", {error: err});
+  });
+})
 
 
 router.get("/logout", function(req, res) {

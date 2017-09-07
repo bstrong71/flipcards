@@ -1,1 +1,18 @@
-<h1>You Are Logged In as {{user}}</h1>
+<div class="main">
+  <h3>You Are Logged In as {{user}}</h3>
+  <div class="home">
+    <div id="titles">
+      <h4>Click on Deck for Game</h4>
+    </div>
+    {{#deck}}
+      <div class="section">
+        <p>Deck Name: {{name}}</p>
+        <a href="/deck/{{id}}">Choose Deck</a>
+        <a href="/trash/{{id}}">Delete Deck</a>
+      </div>
+    {{/deck}}
+    {{^deck}}
+      <p>There are no decks.</p>
+    {{/deck}}
+  </div>
+</div>
