@@ -1,21 +1,21 @@
 <div class="main">
-  <h3>You Are Logged In as {{user}}</h3>
+  <h3>You are logged in as: {{user}}</h3>
   <div class="home">
     <div id="titles">
       <h4>Click on Deck for Game</h4>
     </div>
     {{#deck}}
-      <div class="section">
-        <p>Deck Name: {{name}}</p>
-        <a href="/quiz/{{id}}">Start Quiz</a>
-        <a href="/deck/{{id}}">Change Cards</a>
-      </div>
+    <div class="section">
+      <p>Deck Name: {{name}}</p>
+      <a href="/quiz/{{id}}">Start Quiz</a>
+      <a href="/deck/{{id}}">Change Cards</a>
+    </div>
     {{/deck}}
     {{^deck}}
-      <p>There are no decks.</p>
+    <p>There are no decks.</p>
     {{/deck}}
     <div class="deckInfo">
-      <form class="buildNewDeck" action="/newdeck" method="post">
+      <form id="buildNewDeck" action="/newdeck" method="post">
         <input type="text" name="name" value="" placeholder="Deck Name">
         <button type="submit" name="button">Create Deck</button>
       </form>
