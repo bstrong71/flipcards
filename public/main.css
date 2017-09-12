@@ -1,5 +1,4 @@
 *{
-  /*border: 1px solid blue;*/
   margin: 0;
   padding: 0;
 }
@@ -39,6 +38,7 @@ header a{
 .main h3{
   font-size: 24px;
   margin-bottom: 20px;
+  margin-left: 20px;
 }
 
 .container{
@@ -100,9 +100,10 @@ header a{
 }
 
 .home{
-  border: 1px solid blue;
+  background-color: #e6ecff;
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
 #titles{
@@ -111,12 +112,36 @@ header a{
   text-align: center;
 }
 
+#titles h4{
+  color: #404559;
+  font-size: 42px;
+  margin-top: 10px;
+}
+
 .section{
-  border: 2px solid red;
+  background-color: #c4c7d4;
+  color: #404559;
   flex-basis: 300px;
   height: 150px;
   margin: 20px 30px;
-  padding: 15px;
+  padding: 20px;
+  text-align: center;
+}
+
+.section a{
+  background-color: #f0f1f4;
+  color: black;
+  font-size: 20px;
+  margin: 10px;
+  padding: 5px 9px;
+  text-decoration: none;
+}
+
+.section p{
+  font-size: 32px;
+  margin: 10px;
+  padding-bottom: 20px;
+  text-decoration: none;
 }
 
 .deckInfo{
@@ -124,19 +149,77 @@ header a{
   padding: 15px;
 }
 
-#buildNewDeck input{
-  padding: 8px;
-  margin: 10px 0;
-  width: 200px;
+#buildNewDeck{
+  text-align: center;
 }
 
+#buildNewDeck button{
+  font-size: 20px;
+  padding: 8px;
+  margin: 10px 5px;
+  width: 170px;
+}
+
+#buildNewDeck input{
+  font-size: 20px;
+  padding: 8px;
+  margin: 10px 5px;
+  width: 400px;
+}
+
+.cardsMain{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.changeCards{
+  flex-basis: 100%;
+}
+
+.changeCards h3{
+  font-size: 36px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+#addCardSection{
+  flex-basis: 100%;
+  text-align: center;
+}
+
+#addCard button{
+  font-size: 20px;
+  padding: 8px;
+  margin: 10px 5px;
+  width: 170px;
+}
+
+#addCard input{
+  font-size: 20px;
+  padding: 8px;
+  margin: 10px 5px;
+  width: 350px;
+}
 
 .eachCard{
+  background-color: #f0f1f4;
   border: 1px solid black;
-  margin: 10px;
-  padding: 15px;
+  color: black;
+  flex-basis: 300px;
+  height: 150px;
+  margin: 20px 30px;
+  padding: 20px;
+  text-align: center;
 }
 
 .eachCard p{
   padding: 15px;
+}
+
+.editCard input{
+  font-size: 20px;
+  padding: 8px;
+  margin: 10px 5px;
+  width: 350px;
 }
