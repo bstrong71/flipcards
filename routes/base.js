@@ -80,7 +80,21 @@ router.get("/api/bro", function(req, res) {
 });
 // *******************************************//
 // *******************************************//
-
+//*** Play a game ***//
+router.get("/deck/:id/quiz", function(req, res) {
+  models.Deck.findOne({
+    where: {id: req.params.id},
+    include: [
+      {model: models.Card, as: "Cards"}
+    ]
+  })
+  .then(function(data) {
+    res.render("quiz", {deck: data});
+  })
+  .catch(function(err) {
+    res.render("problem", {error: err});
+  })
+});
 
 //*** Create a new deck ***//
 router.post("/newdeck", function(req, res) {
