@@ -5,8 +5,11 @@
   </div>
   {{#Cards}}
   <div class="eachQuizCard">
-    <p>{{question}}</p>
+    <p id="quizQuestion">{{question}}</p>
+    <p id="quizAnswer">{{answer}}</p>
+    <button onclick="showAnswer(this)" name="cardAnswer">Show Answer</button>
   </div>
   {{/Cards}}
   {{/deck}}
+  <script src="/quiz.js"></script>
 </div>

@@ -237,11 +237,15 @@ header a{
   flex-basis: 300px;
   height: 150px;
   margin: 20px 30px;
-  padding: 20px;
+  padding: 80px 20px 20px 20px;
   text-align: center;
 }
 
-.eachQuizCard p{
+#quizQuestion{
   font-size: 24px;
-  margin-top: 50px;
+}
+
+#quizAnswer{
+  color: #f0f1f4;
+  font-size: 24px;
 }
