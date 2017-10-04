@@ -66,20 +66,20 @@ router.get("/home", isAuthenticated, function(req, res) {
   })
 });
 
- /////********TEMP*TEST DATA to DELETE LATER********//
-const datahere = {
-  id: 1,
-  username: "isaac",
-  password: "asdfasdfasdfasdfs",
-  salt: "asdflkhdfg",
-  favColor: "blue",
-  admin: false
-}
-router.get("/api/bro", function(req, res) {
-  res.status(200).json(datahere)
+//*** Create a new deck ***//
+router.post("/newdeck", isAuthenticated, function(req, res) {
+  models.Deck.create({
+    name: req.body.name,
+    userId: req.user.id
+  })
+  .then(function(data) {
+    res.redirect("/home");
+  })
+  .catch(function(err) {
+    res.render("problem", {error: err});
+  });
 });
-// *******************************************//
-// *******************************************//
+
 //*** Play a game ***//
 router.get("/deck/:id/quiz", isAuthenticated, function(req, res) {
   models.Deck.findOne({
@@ -94,20 +94,6 @@ router.get("/deck/:id/quiz", isAuthenticated, function(req, res) {
   .catch(function(err) {
     res.render("problem", {error: err});
   })
-});
-
-//*** Create a new deck ***//
-router.post("/newdeck", isAuthenticated, function(req, res) {
-  models.Deck.create({
-    name: req.body.name,
-    userId: req.user.id
-  })
-  .then(function(data) {
-    res.redirect("/home");
-  })
-  .catch(function(err) {
-    res.render("problem", {error: err});
-  });
 });
 
 //*** Card Change page ***//

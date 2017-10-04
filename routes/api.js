@@ -15,25 +15,123 @@ passport.use(new BasicStrategy(
 ));
 
 router.get("/", passport.authenticate('basic', {session: false}), function(req, res) {
-  res.send("This is where I would store my API documentation");
+  res.status(200).send("This is where I would store my API documentation");
 });
 
-/////******** for TEMP*TEST*************//
-const datahere = {
- id: 1,
- username: "isaac",
- password: "asdfasdfasdfasdfs",
- salt: "asdflkhdfg",
- favColor: "blue",
- admin: false
-}
+// /////******** for TEMP*TEST*************//
+// const datahere = {
+//  id: 1,
+//  username: "isaac",
+//  password: "asdfasdfasdfasdfs",
+//  salt: "asdflkhdfg",
+//  favColor: "blue",
+//  admin: false
+// }
+//
+// router.get("/api/bro", function(req, res) {
+//  res.status(200).json(datahere)
+// });
+// // *******************************************//
 
-router.get("/api/bro", function(req, res) {
- res.status(200).json(datahere)
+//*** Home page with create deck, select deck, and start ***//
+router.get("/home", passport.authenticate('basic', {session: false}), function(req, res) {
+  models.Deck.findAll()
+  .then(function(data) {
+    res.status(200).send(data);
+  })
+  .catch(function(err) {
+    res.status(400).send(err);
+  })
 });
-// *******************************************//
 
+//*** Create a new deck ***//
+router.post("/newdeck", passport.authenticate('basic', {session: false}), function(req, res) {
+  models.Deck.create({
+    name: req.body.name,
+    userId: req.user.id
+  })
+  .then(function(data) {
+    res.status(200).send(data);
+  })
+  .catch(function(err) {
+    res.status(400).send(err);
+  });
+});
 
+//*** Play a game ***//
+router.get("/deck/:id/quiz", passport.authenticate('basic', {session: false}), function(req, res) {
+  models.Deck.findOne({
+    where: {id: req.params.id},
+    include: [
+      {model: models.Card, as: "Cards"}
+    ]
+  })
+  .then(function(data) {
+    res.status(200).send(data);
+  })
+  .catch(function(err) {
+    res.status(400).send(err);
+  })
+});
 
+//*** Card Change page ***//
+router.get("/deck/:id", passport.authenticate('basic', {session: false}), function(req, res) {
+  models.Deck.findOne({
+    where: {id: req.params.id},
+    include: [
+      {model: models.Card, as: "Cards"}
+    ]
+  })
+  .then(function(data) {
+    res.status(200).send(data);
+  })
+  .catch(function(err) {
+    res.status(400).send(err);
+  })
+});
+
+//*** Create a new card ***//
+router.post("/newcard/:id", passport.authenticate('basic', {session: false}), function(req, res) {
+  models.Card.create({
+    question: req.body.question,
+    answer: req.body.answer,
+    deckId: req.params.id
+  })
+  .then(function(data) {
+    res.status(200).send(data);
+  })
+  .catch(function(err) {
+    res.status(400).send(err);
+  })
+});
+
+//*** Change a card ***//
+router.post("/deck/:deckId/change/:cardId", passport.authenticate('basic', {session: false}), function(req, res) {
+  models.Card.update({
+    question: req.body.question,
+    answer: req.body.answer,
+    deckId: req.params.deckId},
+    {where: {id: req.params.cardId}}
+  )
+  .then(function(data) {
+    res.status(200).send(data);
+  })
+  .catch(function(err) {
+    res.status(400).send(err);
+  })
+});
+
+//*** Delete Card ***//
+router.get("/trash/:id", passport.authenticate('basic', {session: false}), function(req, res) {
+  models.Card.destroy({
+    where: {id: req.params.id}
+  })
+  .then(function(data) {
+    res.status(200).send(data);
+  })
+  .catch(function(err) {
+    res.status(400).send(err);
+  })
+})
 
 module.exports = router;

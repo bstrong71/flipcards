@@ -13,8 +13,11 @@ const flash           = require("express-flash-messages");
 const model           = require("./models/index");
 const bcrypt          = require("bcrypt");
 const cookieParser    = require("cookie-parser");
-
+// initialize Express App
 const app = express();
+
+// added next line for hosting out in production
+app.set('port', (process.env.PORT || 3000));
 
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -99,10 +102,9 @@ app.use('/api', routes);
 app.use(routes);
 
 if(require.main === module) {
-  app.listen(3000, function() {
-    console.log("App is running on localhost:3000");
+  app.listen(app.get('port'), function() {
+    console.log("Node app is running on port", app.get('port'));
   })
 };
-
 
 module.exports = app;

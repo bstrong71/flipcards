@@ -3,21 +3,13 @@ const app     = require("../server");
 
 //testing get call to "/"
 describe("GET /", function() {
-  test("should render successfully", function() {
+  test("should get object successfully", function() {
     return request(app)
-      .get("/")
-      .expect(200);
-  });
-});
-
-describe("GET /api/bro", function() {
-  test("should retrieve user id and username successfully", function() {
-    return request(app)
-      .get("/api/bro")
+      .get("/api/")
       .expect(200)
+      .set({"Authorization": "Basic YmVybmllOmJlcm5pZQ=="})
       .then(function(res) {
-        expect(res.body).toHaveProperty("id");
-        expect(res.body).toHaveProperty("username");
-      });
+        expect(res.body).toHaveProperty()
+      })
   });
 });
