@@ -1,13 +1,19 @@
 <div class="quizMain">
   {{#deck}}
-  <div class="quizTitle">
+  <div id="quizTitle">
     <h3>Quiz: {{name}}</h3>
+    <div class="score">
+    </div>
   </div>
   {{#Cards}}
   <div class="eachQuizCard">
     <p id="quizQuestion">{{question}}</p>
     <p id="quizAnswer">{{answer}}</p>
     <button onclick="showAnswer(this)" name="cardAnswer">Show Answer</button>
+    <div class="addToScore">
+      <button onclick="gotItRight()" name="correct">Got It Right!</button>
+      <button onclick="gotItWrong()" name="wrong">Missed It :(</button>
+    </div>
   </div>
   {{/Cards}}
   {{/deck}}
