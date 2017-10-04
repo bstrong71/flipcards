@@ -81,7 +81,7 @@ router.get("/api/bro", function(req, res) {
 // *******************************************//
 // *******************************************//
 //*** Play a game ***//
-router.get("/deck/:id/quiz", function(req, res) {
+router.get("/deck/:id/quiz", isAuthenticated, function(req, res) {
   models.Deck.findOne({
     where: {id: req.params.id},
     include: [
@@ -97,7 +97,7 @@ router.get("/deck/:id/quiz", function(req, res) {
 });
 
 //*** Create a new deck ***//
-router.post("/newdeck", function(req, res) {
+router.post("/newdeck", isAuthenticated, function(req, res) {
   models.Deck.create({
     name: req.body.name,
     userId: req.user.id
@@ -111,7 +111,7 @@ router.post("/newdeck", function(req, res) {
 });
 
 //*** Card Change page ***//
-router.get("/deck/:id", function(req, res) {
+router.get("/deck/:id", isAuthenticated, function(req, res) {
   models.Deck.findOne({
     where: {id: req.params.id},
     include: [
@@ -128,7 +128,7 @@ router.get("/deck/:id", function(req, res) {
 });
 
 //*** Create a new card ***//
-router.post("/newcard/:id", function(req, res) {
+router.post("/newcard/:id", isAuthenticated, function(req, res) {
   models.Card.create({
     question: req.body.question,
     answer: req.body.answer,
@@ -143,7 +143,7 @@ router.post("/newcard/:id", function(req, res) {
 });
 
 //*** Change a card ***//
-router.post("/deck/:deckId/change/:cardId", function(req, res) {
+router.post("/deck/:deckId/change/:cardId", isAuthenticated, function(req, res) {
   models.Card.update({
     question: req.body.question,
     answer: req.body.answer,
@@ -159,7 +159,7 @@ router.post("/deck/:deckId/change/:cardId", function(req, res) {
 });
 
 //*** Delete Card ***//
-router.get("/trash/:id", function(req, res) {
+router.get("/trash/:id", isAuthenticated, function(req, res) {
   models.Card.destroy({
     where: {id: req.params.id}
   })

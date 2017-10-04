@@ -1,6 +1,6 @@
 const express       = require("express");
-const passport      = require("passport");
 const models        = require("../models/index");
+const passport      = require("passport");
 const BasicStrategy = require("passport-http").BasicStrategy;
 const router        = express.Router();
 
