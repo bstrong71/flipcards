@@ -26,7 +26,8 @@
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
     "pg": "^7.3.0",
-    "sequelize": "^4.8.0"
+    "sequelize": "^4.8.0",
+    "sequelize-cli": "^3.0.0"
   },
   "devDependencies": {
     "jest": "^21.0.1",
