@@ -18,26 +18,13 @@ router.get("/", passport.authenticate('basic', {session: false}), function(req, 
   res.status(200).send("This is where I would store my API documentation");
 });
 
-// /////******** for TEMP*TEST*************//
-// const datahere = {
-//  id: 1,
-//  username: "isaac",
-//  password: "asdfasdfasdfasdfs",
-//  salt: "asdflkhdfg",
-//  favColor: "blue",
-//  admin: false
-// }
-//
-// router.get("/api/bro", function(req, res) {
-//  res.status(200).json(datahere)
-// });
-// // *******************************************//
-
 //*** Home page with create deck, select deck, and start ***//
 router.get("/home", passport.authenticate('basic', {session: false}), function(req, res) {
   models.Deck.findAll()
   .then(function(data) {
-    res.status(200).send(data);
+    res.status(200).send({
+      status: "Success",
+      data: data});
   })
   .catch(function(err) {
     res.status(400).send(err);
@@ -51,7 +38,9 @@ router.post("/newdeck", passport.authenticate('basic', {session: false}), functi
     userId: req.user.id
   })
   .then(function(data) {
-    res.status(200).send(data);
+    res.status(201).send({
+      status: "Success",
+      data: data});
   })
   .catch(function(err) {
     res.status(400).send(err);
@@ -67,7 +56,9 @@ router.get("/deck/:id/quiz", passport.authenticate('basic', {session: false}), f
     ]
   })
   .then(function(data) {
-    res.status(200).send(data);
+    res.status(200).send({
+      status: "Success",
+      data: data});
   })
   .catch(function(err) {
     res.status(400).send(err);
@@ -83,7 +74,9 @@ router.get("/deck/:id", passport.authenticate('basic', {session: false}), functi
     ]
   })
   .then(function(data) {
-    res.status(200).send(data);
+    res.status(200).send({
+      status: "Success",
+      data: data});
   })
   .catch(function(err) {
     res.status(400).send(err);
@@ -98,7 +91,9 @@ router.post("/newcard/:id", passport.authenticate('basic', {session: false}), fu
     deckId: req.params.id
   })
   .then(function(data) {
-    res.status(200).send(data);
+    res.status(201).send({
+      status: "Success",
+      data: data});
   })
   .catch(function(err) {
     res.status(400).send(err);
@@ -114,7 +109,9 @@ router.post("/deck/:deckId/change/:cardId", passport.authenticate('basic', {sess
     {where: {id: req.params.cardId}}
   )
   .then(function(data) {
-    res.status(200).send(data);
+    res.status(201).send({
+      status: "Success",
+      data: data});
   })
   .catch(function(err) {
     res.status(400).send(err);
@@ -127,7 +124,9 @@ router.get("/trash/:id", passport.authenticate('basic', {session: false}), funct
     where: {id: req.params.id}
   })
   .then(function(data) {
-    res.status(200).send(data);
+    res.status(200).send({
+      status: "Success",
+      data: data});
   })
   .catch(function(err) {
     res.status(400).send(err);
