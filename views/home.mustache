@@ -1,8 +1,15 @@
 <div class="main">
   <h3>You are logged in as: {{user}}</h3>
   <div class="home">
+    <div class="deckInfo">
+      <h4>Add New Deck of Cards Here</h4>
+      <form id="buildNewDeck" action="/newdeck" method="post">
+        <input type="text" name="name" value="" placeholder="Deck Name / Topic" autofocus required>
+        <button type="submit" name="button">Create Deck</button>
+      </form>
+    </div>
     <div id="titles">
-      <h4>Click on Deck for Game</h4>
+      <h4>Click "Start Quiz" on a Deck</h4>
     </div>
     {{#deck}}
     <div class="section">
@@ -14,11 +21,5 @@
     {{^deck}}
     <p>There are no decks.</p>
     {{/deck}}
-    <div class="deckInfo">
-      <form id="buildNewDeck" action="/newdeck" method="post">
-        <input type="text" name="name" value="" placeholder="Deck Name / Topic" autofocus required>
-        <button type="submit" name="button">Create Deck</button>
-      </form>
-    </div>
   </div>
 </div>

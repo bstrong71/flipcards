@@ -1,27 +1,32 @@
 <div class="cardsMain">
   {{#deck}}
-  <div class="changeCards">
-    <h3>Make Changes to {{name}}</h3>
-  </div>
   <div id="addCardSection">
+    <h4>Add a Card to the {{name}} Deck</h4>
     <form id="addCard" action="/newcard/{{id}}" method="post">
       <input type="text" name="question" value="" placeholder="Question" required>
       <input type="text" name="answer" value="" placeholder="Answer" required>
       <button type="submit" name="button">Add Card</button>
     </form>
   </div>
+  <div class="changeCards">
+    <h3>Make Changes to {{name}} Cards</h3>
+  </div>
     {{#Cards}}
-      <div class="eachCard">
-        <form class="editCard" action="/deck/{{#deck}}{{id}}{{/deck}}/change/{{id}}" method="post">
-          <input type="text" name="question" value="{{question}}" placeholder="Question">
-          <input type="text" name="answer" value="{{answer}}" placeholder="Answer">
-          <button type="submit" name="button">Edit Card</button>
-        </form>
-        <a href="/trash/{{id}}">Delete Card</a>
-      </div>
+    <div class="eachCard">
+      <form class="editCard" action="/deck/{{#deck}}{{id}}{{/deck}}/change/{{id}}" method="post">
+        <p>Edit Card and Click "Save Changes" Button</p>
+        <input type="text" name="question" value="{{question}}" placeholder="Question">
+        <input type="text" name="answer" value="{{answer}}" placeholder="Answer">
+        <button type="submit" name="button">Save Changes</button>
+      </form>
+      <a href="/trash/{{id}}">Delete Card</a>
+    </div>
+    {{/Cards}}
+    {{^Cards}}
+      <h4>** There are no cards in this deck. **</h4>
     {{/Cards}}
   {{/deck}}
   {{^deck}}
-    <h3>There are no decks.</h3>
+    <h4>** There are no decks. **</h4>
   {{/deck}}
 </div>
