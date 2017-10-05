@@ -12,7 +12,7 @@ function gotItRight() {
   if (total !== totalCards) {
     quizScore.innerHTML = `Your Score: ${score} / ${total}`
   } else {
-    quizScore.innerHTML = `Thanks for Playing! You Got: ${score} / ${total}!`
+    quizScore.innerHTML = `Good Work! You Got: ${score} / ${total}! Pick a New Deck for a New Quiz`
   }
 }
 
@@ -21,7 +21,7 @@ function gotItWrong() {
   if (total !== totalCards) {
     quizScore.innerHTML = `Your Score: ${score} / ${total}`
   } else {
-    quizScore.innerHTML = `Thanks for Playing! You Got: ${score} / ${total}!`
+    quizScore.innerHTML = `Good Work! You Got: ${score} / ${total}! Pick a New Deck for a New Quiz `
   }
 }
 
