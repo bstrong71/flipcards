@@ -44,7 +44,7 @@ header a{
 .container{
   display: flex;
   flex-flow: row wrap;
-  height: 68vh;
+  height: 45vh;
   justify-content: center;
   margin: 30px auto;
 }
@@ -282,16 +282,16 @@ header a{
   background-color: #00cc66;
   color: #404559;
   flex-basis: 320px;
-  height: 150px;
   margin: 20px 30px;
-  padding: 80px 20px 45px 20px;
+  min-height: 250px;
+  padding: 40px 20px 40px 20px;
   text-align: center;
 }
 
 .eachQuizCard button{
   background-color: #C4C7D3;
-  font-size:12px;
-  margin-top:15px;
+  font-size: 12px;
+  margin-top: 50px;
   padding: 10px;
 }
 
