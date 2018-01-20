@@ -4,6 +4,7 @@ const passport      = require("passport");
 const BasicStrategy = require("passport-http").BasicStrategy;
 const router        = express.Router();
 
+// The routes for deployment
 
 passport.use(new BasicStrategy(
   function(username, password, done) {

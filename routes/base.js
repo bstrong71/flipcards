@@ -5,6 +5,8 @@ const bcrypt        = require("bcrypt");
 const LocalStrategy = require('passport-local').Strategy;
 const passport      = require("passport");
 
+// The routes for running locally 
+
 //** Middleware to verify logged in **//
 const isAuthenticated = function (req, res, next) {
   if (req.isAuthenticated()) {
