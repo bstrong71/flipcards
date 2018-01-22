@@ -1,20 +1,43 @@
 const express         = require("express");
+
+// mustache-express gives access to the views
 const mustacheExpress = require("mustache-express");
+
+// body-parser parses incoming requests in a middleware
+// can access content of json thru req.body
 const bodyParser      = require("body-parser");
+
+// path gives app connection to public and views folders
 const path            = require("path");
+
 const routes          = require("./routes/base");
 const api             = require("./routes/api");
+
+// morgan show request status codes in CLI
 const morgan          = require("morgan");
+
+// used for authentication for local and basics
 const passport        = require("passport");
 const LocalStrategy   = require("passport-local").Strategy;
 const BasicStrategy   = require('passport-http').BasicStrategy;
+
+// allows saving cookie for current session
 const session         = require("express-session");
+
+// provides flash messages for rendering/redirecting
 const flash           = require("express-flash-messages");
+
 const model           = require("./models/index");
+
+// pashword hashing function
 const bcrypt          = require("bcrypt");
+
+// parses cookies and puts the info on req object in the middleware
 const cookieParser    = require("cookie-parser");
+
 // initialize Express App
 const app = express();
+
 
 // added next line for hosting out in production
 app.set('port', (process.env.PORT || 3000));
